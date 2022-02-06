@@ -1,4 +1,4 @@
-package com.eu.modris;
+package src.modris;
 
 import java.sql.*;
 import java.util.Scanner;

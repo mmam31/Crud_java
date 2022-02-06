@@ -1,4 +1,4 @@
-package com.eu.modris;
+package src.modris;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ public class CrudMain {
     public static void main(String[] args) {
 
 
-        com.eu.modris.CrudLogic crudLogic = new com.eu.modris.CrudLogic();
+        CrudLogic crudLogic = new CrudLogic();
 
         Scanner scanner = new Scanner(System.in);
 
