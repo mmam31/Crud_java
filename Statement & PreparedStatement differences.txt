@@ -1,0 +1,60 @@
+STATEMENT
+Used to execute string-based SQL queries
+
+1.Statement interface accepts strings as SQL queries. 
+The code becomes less readable when concatenate SQL strings.
+
+2.It is vulnerable to SQL injection. 
+(SQL injection ir datorsistēmu ielaušanās veids, kurā uzbrucējs ar klienta tiesībām mēģina piekļūt datubāzei,
+kas ir dotās tīmekļa lapas vai lietotnes pamatā. 
+SQL injection ir vispopulārākais lietojumprogrammatūru līmeņa uzbrukuma veids).
+
+3.JDBC passes the query with inline values to the database. 
+Therefore, there's no query optimization, and most importantly, the database engine must ensure all the checks. 
+Also, the query will not appear as the same to the database and it will prevent cache usage.
+
+4.The Statement interface is suitable for DDL queries like CREATE, ALTER, and DROP
+DDL queries - Data Definition Language(Datu definēšanas valoda). DDL komandas palīdz izveidot datubāzes struktūru un citus datu bāzes objektus. 
+Tās komandas ir automātiski izpildītas. Tāpēc izmaiņas tiek saglabātas datubāzē pastāvīgi.
+DDL ir SQL komandas veids, kas palīdz definēt datu bāzes shēmas.
+DDL komandas ietekmē visu datubāzi vai tabulu.
+
+5.The Statement interface can’t be used for storing and retrieving files and arrays.
+
+PREPARED STATEMENT
+Used to execute parameterized SQL queries
+
+1.The PreparedStatement extends the Statement interface. It has methods to bind various object types, 
+including files and arrays. The code becomes easier to understand.
+
+2.It protects against SQL injection, by escaping the text for all the parameter values provided.
+
+3.The PreparedStatement uses pre-compilation. As soon as the database gets a query, it will check the cache before pre-compiling the query. 
+Consequently, if it is not cached, the database engine will save it for the next usage.
+Moreover, this feature speeds up the communication between the database and the JVM through a non-SQL binary protocol. 
+That is to say, there is less data in the packets, so the communication between the servers goes faster.
+
+4.The PreparedStatement is more suitable for DML queries like INSERT, UPDATE, DELETE, SELECT.
+DML queries - Data Manipulation Language(Datu manipuācijas valoda). DML komandas palīdz pārvaldīt datu bāzē saglabātos datus. 
+DML komandas nav automātiski izpildītas. Datu bāzes izmaiņas nav pastāvīgas, tāpēc ir iespējams atcelt darbību.
+DML ir SQL komandas veids, kas palīdz iegūt un pārvaldīt datus relāciju datu bāzēs.
+DML komandas ietekmē vienu vai vairākus ierakstus tabulā.
+
+5.The PreparedStatement provides an easy way to store and retrieve files by using BLOB and CLOB data types. 
+In the same vein, it helps to store lists by converting java.sql.Array to a SQL Array.
+BLOB: mainīga garuma bināra lielu objektu virkne, kas var būt līdz 2 GB (2 147 483 647) gara. 
+Galvenokārt paredzēta balss vai jauktu datu glabāšanai. BLOB virknes nav saistītas ar rakstzīmju kopu, tāpat kā FOR BIT DATA virknes.
+
+CLOB: mainīga garuma rakstzīmju liela objektu virkne, kas var būt līdz 2 GB (2 147 483 647) gara. 
+CLOB var saglabāt viena baita rakstzīmju virknes vai vairāku baitu rakstzīmju datus. CLOB tiek uzskatīta par rakstzīmju virkni.
+
+GALVENIE SECINĀJUMI:
+
+1.Abi interfeisi izpidla SQL queries. PreparedStatement jau pirms izpildes tiek sakompilēts, tādejādi paātrinot komunikāciju starp JVM un datubāzi.
+2.PreparedStatement ir drošāks par Statement-Izmantojot Statement ļaundariem ir vieglāk iekļūt datubāzē, nozagt datus vai tos izmainīt.
+3.Statement nevar izmantot failu un masīvu glabāšanai un izgūšanai, turpretī PreparedStatement sniedz iespēju vienkārši 
+glabāt un izgūt datus izmantojot BLOB un CLOB(skatīt 5.punktu pie PreparedStatement).
+4.Izmantojot PreparedStatement koda rakstīšanā, tas dod iespēju izmantot metodes lai savienotu kopā dažādus objektu tipus. 
+Kods ir vieglāk lasāms, mazak teksta.
+5.Tā kā Statement akceptē Strings kā SQL queries, kods kļūst garāks, grūtak uztverams un palielina iespēju pieļaut kļūdas.
+6.Galvenā atšķirība ir tāda, ka Statement palīdz mainīt datu bāzes struktūru, bet PreparedStatement palīdz pārvaldīt datubāzē esošos datus.
