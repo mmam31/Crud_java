@@ -86,8 +86,8 @@ public class CrudLogic {
             statement.setString(1, "banans");
 
 
-            int i = statement.executeUpdate();
-            System.out.println(i + " Lietotājs dzēsts!");
+            int d = statement.executeUpdate();
+            System.out.println(d + " Lietotājs dzēsts!");
 
 
 
@@ -104,13 +104,13 @@ public class CrudLogic {
             PreparedStatement statement = connection.prepareStatement("UPDATE userdata SET password=?, name=?, email=? WHERE username=?");
 
 
-            statement.setString(1, "sarezgitaParole");
-            statement.setString(2, "Liels Ābols");
+            statement.setString(1, "sarezgitaParole1");
+            statement.setString(2, "Liels Sarkans Ābols");
             statement.setString(3, "liels.sarkans.abols@gmail.com");
             statement.setString(4, "abols");
 
-            int i = statement.executeUpdate();
-            System.out.println(i + " Lietotājs atjaunināts!");
+            int u = statement.executeUpdate();
+            System.out.println(u + " Lietotājs atjaunināts!");
 
 
 
